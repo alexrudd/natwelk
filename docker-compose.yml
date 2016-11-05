@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  elasticsearch:
+    image: elasticsearch:5
+
+  logstash:
+    image: logstash:5
+    command: -f /config
+    volumes:
+      - ./logstash_config:/config
+      - ./statements:/statements
+    links:
+      - elasticsearch
+
+  kibana:
+    image: kibana:5
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
