@@ -3,6 +3,7 @@ version: '2'
 services:
   elasticsearch:
     image: elasticsearch:5
+    command: -E action.search.shard_count.limit=5000
 
   logstash:
     image: logstash:5
